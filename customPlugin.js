@@ -3,8 +3,6 @@
 
     mw.kalturaPluginWrapper(function () {
         mw.PluginManager.add('myComponent', mw.KBaseComponent.extend({
-
-
             // Set basic config for all components
             defaultConfig: {
                 align: "right",
@@ -12,15 +10,9 @@
                 smartContainer: 'morePlugins',
                 smartContainerCloseEvent: 'ctPlayer',
                 displayImportance: "low",
-                downloadName: '{mediaProxy.entry.name}',
-                showTooltip: true,
-                preferredBitrate: '',
-                flavorID: '',
+                showTooltip: false,
                 title: 'ClassTranscribe Player',
                 order: 41
-            },
-            isSafeEnviornment: function () {
-                return !mw.isIOS();
             },
             setup: function () {
                 var _this = this;
@@ -29,30 +21,11 @@
                 });
             },
             ctPlayer: function () {
-                var ks = this.getKalturaClient().getKs();
-                var ctPlayerUrl = 'https://classtranscribe-dev.ncsa.illinois.edu/liveplayer?videosrc=https://cdnapisec.kaltura.com/p/1359391/sp/0/playManifest/entryId/';
+                var ctPlayerUrl = 'https://classtranscribe-dev.ncsa.illinois.edu/liveplayer?videosrc=https://cdnapisec.kaltura.com/p/';
+                ctPlayerUrl += this.getPlayer().kpartnerid + '/sp/0/playManifest/entryId/';
                 ctPlayerUrl += this.getPlayer().kentryid + '/format/applehttp/protocol/https/flavorParamId/manifest.m3u8';
-                // ctPlayerUrl += this.getPlayer().kwidgetid + '/uiconf_id/' + this.getPlayer().kuiconfid;
-                // ctPlayerUrl += '&downloadName=' + encodeURIComponent(this.getConfig('downloadName'));
-                // if (this.isSourceOnly()) {
-                // 	ctPlayerUrl += '&flavorParamsId=0'
-                // } else {
-                // 	if (this.getConfig('flavorParamsId')) {
-                // 		downloadUrl += '&flavorParamsId=' + encodeURIComponent(this.getConfig('flavorParamsId'));
-                // 	}
-                // 	if (this.getConfig('preferredBitrate') != '' && this.getConfig('preferredBitrate') != null) {
-                // 		downloadUrl += '&preferredBitrate=' + encodeURIComponent(this.getConfig('preferredBitrate'));
-                // 	}
-                // 	if (this.getConfig('flavorID') != '' && this.getConfig('flavorID') != null) {
-                // 		downloadUrl += '&flavorID=' + encodeURIComponent(this.getConfig('flavorID'));
-                // 	}
-                // }
 
-                // if( ks ){
-                // 	downloadUrl += '&ks=' + ks;
-                // }
-
-                window.open(ctPlayerUrl);
+                window.open(encodeURI(ctPlayerUrl));
             },
             getComponent: function () {
                 var _this = this;
@@ -66,14 +39,7 @@
                         });
                 }
                 return this.$el;
-            },
-            isSourceOnly: function () {
-                //Entries with only a source have only one flavor
-                if (this.getPlayer().kalturaFlavors.length === 1) {
-                    return true;
-                }
             }
-
         }));
     });
 
