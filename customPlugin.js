@@ -16,7 +16,7 @@
             preferredBitrate: '',
             flavorID: '',
             title: gM('mwe-embedplayer-download_clip'),
-            order: 
+            order: 41
     },
         isSafeEnviornment: function () {
             return !mw.isIOS();
