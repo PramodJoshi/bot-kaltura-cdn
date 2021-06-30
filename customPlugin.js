@@ -9,5 +9,6 @@ kWidget.embed({
         // "IframeCustomPluginCss1" : 'https://cdn.jsdelivr.net/gh/PramodJoshi/bot-kaltura-cdn/customSkin.css'
     },
     "cache_st": 1382198751,
+    "entry_id": "1_pqposeri"
 });
 </script>
