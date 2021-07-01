@@ -12,7 +12,8 @@
                 displayImportance: "low",
                 title: 'ClassTranscribe Player',
                 order: 31,
-                img: 'https://uofi.box.com/shared/static/1g67u1c8atarjmcbex1qpjeb763d94dj.png'
+                tabIndex: 8,
+                img: 'https://uofi.box.com/shared/static/5bzxsygsk8y0pz0azzpigg110zovibq9.png'
             },
             setup: function () {
                 var _this = this;
@@ -24,7 +25,7 @@
                 var ctPlayerUrl = 'https://classtranscribe-dev.ncsa.illinois.edu/liveplayer?videosrc=https://cdnapisec.kaltura.com/p/';
                 ctPlayerUrl += this.getPlayer().kpartnerid + '/sp/0/playManifest/entryId/';
                 ctPlayerUrl += this.getPlayer().kentryid + '/format/applehttp/protocol/https/flavorParamId/ manifest.m3u8';
-                
+
                 window.open(encodeURI(ctPlayerUrl));
             },
             getComponent: function () {
@@ -34,15 +35,16 @@
                         alt: this.getConfig('title'),
                         src: this.getConfig('img')
                     });
-    
+
                 if (!this.$el) {
                     this.$el = $('<div />')
                         .addClass(this.getCssClass())
                         .append(
                             $('<a />')
+                                .attr({ 'tabIndex': this.getConfig('tabIndex') })
                                 .attr({
                                     'title': this.getConfig('title'),
-    
+
                                 }).append($img)
                         ).click(function () {
                             if (_this.isDisabled) return;
